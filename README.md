@@ -4,3 +4,18 @@ We're using standard openzepplin libraries
 
 NFTs are only mintable by owner
 Transfers and approvals are only allowed to be called by owner.
+
+compile:
+```
+npx truffle compile --all
+```
+
+deploy:
+```
+npx truffle migrate --reset --network ropsten #don't use --reset if you just want to update it in place!
+```
+
+verify:
+```
+npx truffle run verify ClubNervaMembership@<contract address> --network ropsten
+```

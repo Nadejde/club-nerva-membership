@@ -22,7 +22,7 @@
 //
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
-const { alchemyApiKey, mnemonic } = require('./secrets.json');
+const { alchemyApiKey, mnemonic, etherscan } = require('./secrets.json');
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 module.exports = {
@@ -47,9 +47,9 @@ module.exports = {
           mnemonic, `https://eth-ropsten.alchemyapi.io/v2/${alchemyApiKey}`,
         ),
         network_id: 3,
-        gasPrice: 10e9,
+        gasPrice: 20e9,
         skipDryRun: true,
-        gas: 3000000
+        gas: 5000000
       }
     // Useful for testing. The `development` name is special - truffle uses it by default
     // if it's defined here and no other network is specified at the command line.
@@ -98,17 +98,24 @@ module.exports = {
   compilers: {
     solc: {
       version: "0.8.10",    // Fetch exact version from solc-bin (default: truffle's version)
-      // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
-      // settings: {          // See the solidity docs for advice about optimization and evmVersion
-      //  optimizer: {
-      //    enabled: false,
-      //    runs: 200
-      //  },
-      //  evmVersion: "byzantium"
-      // }
+      docker: false,        // Use "0.5.1" you've installed locally with docker (default: false)
+      settings: {          // See the solidity docs for advice about optimization and evmVersion
+        optimizer: {
+          enabled: false,
+          runs: 200
+        },
+        evmVersion: "byzantium"
+      }
     }
   },
+  plugins: [
+    'truffle-plugin-verify'
+  ],
 
+  api_keys: {
+    etherscan: etherscan
+  }
+  
   // Truffle DB is currently disabled by default; to enable it, change enabled:
   // false to enabled: true. The default storage location can also be
   // overridden by specifying the adapter settings, as shown in the commented code below.

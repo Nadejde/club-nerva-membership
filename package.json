@@ -19,6 +19,7 @@
     "chai": "^4.3.4",
     "ganache-cli": "^6.12.2",
     "mocha": "^9.1.3",
-    "truffle": "^5.4.19"
+    "truffle": "^5.4.19",
+    "truffle-plugin-verify": "^0.5.18"
   }
 }
